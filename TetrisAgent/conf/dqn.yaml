@@ -1,0 +1,30 @@
+defaults:
+  - logging: common
+
+training:
+  env: tetris_gymnasium/Tetris
+  total_timesteps: 2000000
+  learning_rate: 1e-4
+  buffer_size: 50000
+  batch_size: 256
+  gamma: 0.99
+  exploration_fraction: 0.1
+  exploration_final_eps: 0.02
+  train_freq: 4
+  target_update_interval: 1000
+  policy: MultiInputPolicy
+  render_mode: rgb_array
+  record_video: true
+  video_folder: videos/
+  video_trigger_episode: 10
+  n_training_envs: 1
+
+  # Evaluation configuration
+  eval:
+    n_eval_envs: 1
+    eval_freq: 500      # Base frequency; actual eval frequency is computed based on training env count.
+    n_eval_episodes: 5
+    best_model_save_path: eval_models
+    log_path: eval_logs
+    deterministic: true
+    render: false
